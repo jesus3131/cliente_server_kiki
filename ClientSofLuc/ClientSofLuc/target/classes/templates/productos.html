@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Beauty Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #fff0f6;
+          margin: 0;
+          padding: 0;
+        }
+    
+        header {
+          background-color: #fff;
+          padding: 15px 20px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+    
+        .logo {
+          font-size: 26px;
+          font-weight: bold;
+          color: #333;
+        }
+    
+        .logo span {
+          color: #e4519a;
+        }
+    
+        .back-button {
+          text-decoration: none;
+          background-color: #e4519a;
+          color: white;
+          padding: 10px 15px;
+          border-radius: 5px;
+          font-weight: bold;
+        }
+    
+        .back-button:hover {
+          opacity: 0.8;
+        }
+    
+        .products {
+          width: 90%;
+          max-width: 1200px;
+          margin: 40px auto;
+        }
+    
+        .products h2 {
+          text-align: center;
+          color: #333;
+          margin-bottom: 30px;
+        }
+    
+        .product-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 20px;
+        }
+    
+        .product-card {
+          background: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+          overflow: hidden;
+          transition: transform 0.3s;
+        }
+    
+        .product-card:hover {
+          transform: translateY(-5px);
+        }
+    
+        .product-image img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+        }
+    
+        .product-info {
+          padding: 15px;
+          text-align: center;
+        }
+    
+        .product-info h3 {
+          font-size: 1em;
+          margin-bottom: 5px;
+          color: #333;
+        }
+    
+        .product-info p {
+          color: #e4519a;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+    
+        .add-to-cart {
+          background-color: #e4519a;
+          color: white;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 5px;
+          cursor: pointer;
+          width: 100%;
+        }
+         
+        .hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background-color: #ffe5ec;
+  min-height: 80vh;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 40px;
+}
+
+.hero-text {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 2.8em;
+  color: #333;
+}
+
+.hero-text span {
+  color: #e4519a;
+}
+
+.hero-text p {
+  font-size: 1.3em;
+  margin: 20px 0;
+}
+
+.shop-btn {
+  padding: 12px 24px;
+  background-color: #e4519a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.shop-btn:hover {
+  background-color: #c93e87;
+}
+
+.hero-image {
+  position: relative;
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.promo-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #e4519a;
+  color: white;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 50%;
+  font-size: 1.1em;
+}
+
+        /* Carrito fijo */
+        #carrito-boton {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background-color: #e4519a;
+          color: white;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 50px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          z-index: 1001;
+        }
+    
+        #carrito-panel {
+          position: fixed;
+          top: 0;
+          right: -400px;
+          width: 350px;
+          height: 100%;
+          background: white;
+          border-left: 2px solid #ccc;
+          box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+          padding: 20px;
+          transition: right 0.3s ease-in-out;
+          z-index: 1000;
+        }
+    
+        #carrito-panel.abierto {
+          right: 0;
+        }
+    
+        #carrito-items {
+          max-height: 60vh;
+          overflow-y: auto;
+          margin-bottom: 15px;
+        }
+    
+        .item-carrito {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 12px;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 8px;
+        }
+    
+        .item-carrito span {
+          flex: 1;
+          margin: 0 5px;
+        }
+    
+        .item-carrito button {
+          padding: 4px 8px;
+          margin: 0 3px;
+          border: none;
+          background: #e4519a;
+          color: white;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+    
+        #pagar-btn {
+          width: 100%;
+          background: #333;
+          color: white;
+          padding: 12px;
+          font-weight: bold;
+          border-radius: 6px;
+          font-size: 16px;
+        }
+    
+        footer {
+          background: #e4519a;;
+          color: rgb(16, 1, 1);
+          text-align: center;
+          padding: 20px;
+          margin-top: 60px;
+        }
+      </style>
+    </head>
+    <body>
+    <body>
+
+        <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">SofLuc <span>Shop Beauty</span></div>
+    <a href="javascript:window.history.back();" class="back-button">⬅ Volver</a>
+  </div>
+        
+     <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>NEW <span>ARRIVALS</span></h1>
+        <p>HOT COLLECTION<br>Skin & Body Care</p>
+        <button class="shop-btn">ENTER SHOP</button>
+      </div>
+      <div class="hero-image">
+        <img src="https://i.pinimg.com/736x/a9/34/bd/a934bdb94579543e7cbddd7655559913.jpg" alt="Modelo con productos de belleza">
+        <div class="promo-badge">75%</div>
+      </div>
+    </div>
+  </section>
+    
+    <!-- Featured Products -->
+    <section class="products">
+        <h2>FEATURED PRODUCTS</h2>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/ef/31/9e/ef319e98d0e5233ffc3a1ff81f05eec5.jpg" alt="Luxury Perfume">
+                </div>
+                <div class="product-info">
+                    <h3>Base de Alta Covertura</h3>
+                    <p>$20.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/b9/6f/35/b96f3596e04413574d227a3d19d9b0e9.jpg" alt="Luxury Eyeshadow">
+                </div>
+                <div class="product-info">
+                    <h3>Blush cremoso</h3>
+                    <p>$25.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/ff/95/e0/ff95e0a8a6d39a43618d0329f6aaa4dc.jpg" alt="Makeup Palette">
+                </div>
+                <div class="product-info">
+                    <h3>Brochas</h3>
+                    <p>$35.000</p>
+                    <button class="add-to-cart">Agregar compra</button>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/ea/f5/68/eaf568e780e3d665b514d4966154ed3e.jpg" alt="Premium Fragrance">
+                </div>
+                <div class="product-info">
+                    <h3>Tinta para Labios</h3>
+                    <p>$12.000</p>
+                    <button class="add-to-cart">Agregar compra</button>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/ca/5a/34/ca5a3429c716de18e5db5d9f09c37c45.jpg" alt="Luxury Lipstick">
+                </div>
+                <div class="product-info">
+                    <h3>Combo Magico</h3>
+                    <p>$40.000</p>
+                    <button class="add-to-cart">Agregar compra</button>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/10/39/ad/1039ad699108aa0a9b56f83341982f51.jpg" alt="Eyeshadow Palette">
+                </div>
+                <div class="product-info">
+                    <h3>Paleta de Sombra</h3>
+                    <p>$29.000</p>
+                    <button class="add-to-cart">Agregar compra</button>
+                </div>
+            </div>
+            
+            <!-- Product 7 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/03/a3/a6/03a3a64e66888b79beacc040eb37cc25.jpg" alt="Eyeshadow Palette"><!-- AQUÍ COLOCA EL ENLACE DE TU IMAGEN PRODUCTO 7: 
+                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_7" alt="Product 7"> -->
+                    <img src="/api/placeholder/300/300" alt="Face Serum">
+                </div>
+                <div class="product-info">
+                    <h3>Ganchitos por unidad</h3>
+                    <p>$3.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+            
+            <!-- Product 8 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/f1/9b/44/f19b4474d1ac62471bd5aa63932b73fa.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Pañitos Desmaquillantes</h3>
+                    <p>$10.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/61/0d/4b/610d4b5f68bb9e41a45a1778399368bf.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Blush </h3>
+                    <p>$15.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/36/a8/81/36a88102841af73d7f4c7aad806e27d1.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Tocobo</h3>
+                    <p>$15.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/69/6b/f1/696bf12742135852cdf3de4432919628.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>splahs refresh</h3>
+                    <p>$18.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/2e/67/36/2e6736651491f00fb6623b045faa1ae3.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Agua de Rsas</h3>
+                    <p>$10.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/45/6f/9b/456f9be1facb0305364523ebe4fb280f.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Laneige</h3>
+                    <p>$16.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/74/29/02/742902ae7d2c5e161c48fcffedb7e423.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Polvo suelto</h3>
+                    <p>$14.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/dd/34/77/dd3477c50e1b23fd495f20be371aee1b.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Combo de Limpieza Facial</h3>
+                    <p>$50.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/43/b0/4b/43b04b53abc120f51431544091138f15.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Tonico Facial (Original)</h3>
+                    <p>$170.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/f1/9b/44/f19b4474d1ac62471bd5aa63932b73fa.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Pañitos Desmaquillantes</h3>
+                    <p>$10.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/f1/9b/44/f19b4474d1ac62471bd5aa63932b73fa.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Pañitos Desmaquillantes</h3>
+                    <p>$10.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/f1/9b/44/f19b4474d1ac62471bd5aa63932b73fa.jpg" alt="Eyeshadow Palette"><!-- A                    <img src="URL_DE_TU_IMAGEN_PRODUCTO_8" alt="Product 8"> -->
+                    <img src="/api/placeholder/300/300" alt="Foundation">
+                </div>
+                <div class="product-info">
+                    <h3>Pañitos Desmaquillantes</h3>
+                    <p>$10.000</p>
+                    <button class="add-to-cart">Agregar Compra</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Información</h3>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Envíos</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 The Beauty Shop. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+<!-- Carrito -->
+<button id="carrito-boton">
+    🛒 <span id="carrito-contador">0</span>
+  </button>
+
+  <div id="carrito-panel">
+    <h3>🛍️ Carrito de Compras</h3>
+    <div id="carrito-items"></div>
+    <p id="carrito-total">Total: $0</p>
+    <button id="pagar-btn">💳 Pagar Ahora</button>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const carrito = {};
+    const carritoBtn = document.getElementById("carrito-boton");
+    const carritoPanel = document.getElementById("carrito-panel");
+    const carritoContador = document.getElementById("carrito-contador");
+    const carritoItems = document.getElementById("carrito-items");
+    const carritoTotal = document.getElementById("carrito-total");
+
+    carritoBtn.addEventListener("click", () => {
+      carritoPanel.classList.toggle("abierto");
+    });
+
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = e.target.closest('.product-card');
+        const nombre = card.querySelector('h3').textContent;
+        const precio = parseInt(card.querySelector('p').textContent.replace(/[^0-9]/g, ''));
+
+        if (!carrito[nombre]) {
+          carrito[nombre] = { cantidad: 1, precio };
+        } else {
+          carrito[nombre].cantidad++;
+        }
+
+        actualizarCarrito();
+      });
+    });
+
+    function actualizarCarrito() {
+      carritoItems.innerHTML = '';
+      let total = 0;
+      let cantidadTotal = 0;
+
+      for (const nombre in carrito) {
+        const item = carrito[nombre];
+        total += item.precio * item.cantidad;
+        cantidadTotal += item.cantidad;
+
+        const div = document.createElement('div');
+        div.className = 'item-carrito';
+        div.innerHTML = `
+          <span>${nombre}</span>
+          <button onclick="cambiarCantidad('${nombre}', -1)">–</button>
+          <span>${item.cantidad}</span>
+          <button onclick="cambiarCantidad('${nombre}', 1)">+</button>
+          <button onclick="eliminarItem('${nombre}')">🗑️</button>
+        `;
+        carritoItems.appendChild(div);
+      }
+
+      carritoContador.textContent = cantidadTotal;
+      carritoTotal.textContent = `Total: $${total.toLocaleString()}`;
+    }
+
+    function cambiarCantidad(nombre, cambio) {
+      if (carrito[nombre]) {
+        carrito[nombre].cantidad += cambio;
+        if (carrito[nombre].cantidad <= 0) {
+          delete carrito[nombre];
+        }
+        actualizarCarrito();
+      }
+    }
+
+    function eliminarItem(nombre) {
+      delete carrito[nombre];
+      actualizarCarrito();
+    }
+
+    document.getElementById('pagar-btn').addEventListener('click', () => {
+      if (Object.keys(carrito).length === 0) {
+        alert('Tu carrito está vacío.');
+      } else {
+        alert('¡Gracias por tu compra! Procesando pago...');
+      }
+    });
+  </script>
+       
+</body>
+</html>

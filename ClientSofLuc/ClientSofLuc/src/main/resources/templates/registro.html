@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro - SofLuc Shop Beauty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f6;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #e4519a;
+      padding: 15px 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: 'Dancing Script', cursive;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    nav ul li a:hover {
+      background-color: #ff66b2;
+    }
+
+    .register-container {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      margin: 120px auto 50px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5em;
+      color: #e4519a;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e4519a;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #ff66b2;
+      box-shadow: 0 0 8px rgba(228, 81, 154, 0.5);
+    }
+
+    button {
+      background: linear-gradient(135deg, #e4519a, #ff66b2);
+      color: white;
+      font-size: 20px;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #ff66b2, #e4519a);
+    }
+
+    .extra-links {
+      margin-top: 20px;
+    }
+
+    .extra-links a {
+      color: #e4519a;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+      <li><a href="/productos"><i class="fas fa-boxes"></i> Productos</a></li>
+    </ul>
+  </nav>
+
+  <!-- Registro -->
+  <div class="register-container">
+    <h1><i class="fas fa-user-plus"></i> Registro de Usuario</h1>
+    <form action="/registrarUsuario" method="post">
+      <div class="input-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required />
+      </div>
+
+      <div class="input-group">
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required />
+      </div>
+
+      <div class="input-group">
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" id="contraseña" name="contraseña" placeholder="Crea una contraseña" required />
+      </div>
+
+      <button type="submit"><i class="fas fa-user-plus"></i> Registrarse</button>
+    </form>
+
+    <div class="extra-links">
+      <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
+    </div>
+  </div>
+
+</body>
+</html>

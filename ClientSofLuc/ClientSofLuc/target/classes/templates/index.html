@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SofLuc Shop Beauty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #ffe4ec;
+      text-align: center;
+    }
+
+    header {
+      background-color: #fff;
+      padding: 15px 10%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #333;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .logo span {
+      color: #e4519a;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #e4519a;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 15px;
+      transition: color 0.3s;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .nav-links a:hover {
+      color: #ff66b2;
+    }
+
+    .main-content {
+      margin: 60px 0;
+    }
+
+    .main-content h1 {
+      font-size: 3em;
+      color: #e4519a;
+      margin-bottom: 20px;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s;
+      font-size: 18px;
+      display: inline-block;
+    }
+
+    .register-btn {
+      background: linear-gradient(135deg, #e4519a, #ff66b2);
+      color: white;
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, #333, #555);
+      color: white;
+    }
+
+    .buttons a:hover {
+      transform: scale(1.05);
+    }
+
+    .categories {
+      margin: 50px auto;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .category {
+      background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      width: 250px;
+    }
+
+    .category:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .category img {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .category p {
+      font-weight: bold;
+      margin-top: 12px;
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">SofLuc <span>Beauty</span></div>
+    <div class="nav-links">
+      <nav>
+        <a href="/productos"><i class="fas fa-shopping-bag"></i> Productos</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section class="main-content">
+    <h1>Bienvenidos a SofLuc Beauty</h1>
+    <div class="buttons">
+      <a href="/login" class="login-btn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>  
+      <a href="/register" class="register-btn"><i class="fas fa-user-plus"></i> Registrarse</a>  
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories">
+    <div class="category">
+      <img src="https://i.pinimg.com/736x/ef/31/9e/ef319e98d0e5233ffc3a1ff81f05eec5.jpg" alt="Bases">
+      <p>Bases</p>
+    </div>
+    <div class="category">
+      <img src="https://i.pinimg.com/736x/b9/6f/35/b96f3596e04413574d227a3d19d9b0e9.jpg" alt="Blush">
+      <p>Blush</p>
+    </div>
+    <div class="category">
+      <img src="https://i.pinimg.com/736x/ff/95/e0/ff95e0a8a6d39a43618d0329f6aaa4dc.jpg" alt="Cuidado Facial">
+      <p>Cuidado Facial</p>
+    </div>
+  </section>
+
+</body>
+</html>
